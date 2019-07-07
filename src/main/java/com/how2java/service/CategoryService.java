@@ -8,4 +8,10 @@ import com.how2java.util.Page;
 public interface CategoryService {
 
 	List<Category> list();
+
+	/**
+	 * 事务测试
+	 * @param
+	 */
+	void addTwo();
 }

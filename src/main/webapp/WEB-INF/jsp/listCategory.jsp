@@ -9,6 +9,8 @@
 	        <td>id</td>
 	        <td>name</td>
 	    </tr>
+<%--		在WEB-INF下创建jsp目录，并创建文件listCategory.jsp。
+		在这个jsp文件中，通过forEach标签，遍历CategoryController传递过来的集合数据。--%>
 	    <c:forEach items="${cs}" var="c" varStatus="st">
 	        <tr>
 	            <td>${c.id}</td>
