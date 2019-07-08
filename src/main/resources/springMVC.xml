@@ -19,12 +19,17 @@
           expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <!--2. 注解驱动，以使得访问路径与方法的匹配可以通过注解配置-->
-    <!--<mvc:annotation-driven />-->
+    <!--2. 注解驱动，以使得访问路径与方法的匹配可以通过注解配置  提供了过滤器进行ssm的中文处理，但是json处理还要加点额外的内容。-->
+<!--    <mvc:annotation-driven />-->
     <mvc:annotation-driven >
-        <mvc:message-converters register-defaults="true">
+        <!--支持json格式 Spring中解析字符串的转换器默认编码居然是ISO-8859-1 -->
+        <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                <property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
