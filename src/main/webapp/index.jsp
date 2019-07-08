@@ -11,6 +11,6 @@
     <title>mvc</title>
   </head>
   <body>
-  mvc success！
+  mvc success！你好
   </body>
 </html>
