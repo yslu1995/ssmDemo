@@ -2,6 +2,7 @@ package com.how2java.test;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.how2java.service.CategoryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ public class MybatisTest {
      */
     @Test
     public void testAddTwo() {
-
+        System.out.println("测试数据 ---------->" + JSON.toJSONString("fcaawf"));
         categoryService.addTwo();
 
     }
