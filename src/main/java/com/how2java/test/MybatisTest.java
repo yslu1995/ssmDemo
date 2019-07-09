@@ -1,23 +1,19 @@
 package com.how2java.test;
 
-import java.util.List;
-
 import com.alibaba.fastjson.JSON;
+import com.how2java.mapper.CategoryMapper;
 import com.how2java.service.CategoryService;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.how2java.mapper.CategoryMapper;
-import com.how2java.pojo.Category;
-import com.how2java.util.Page;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
 public class MybatisTest {
-
+    static Logger logger = Logger.getLogger(MybatisTest.class);
     @Autowired
     private CategoryMapper categoryMapper;
 
@@ -29,8 +25,15 @@ public class MybatisTest {
      */
     @Test
     public void testAddTwo() {
+//        配置一次就会输出一次日志
+//        BasicConfigurator.configure();
+//        BasicConfigurator.configure();
+//        BasicConfigurator.configure();
+//        logger.setLevel(Level.DEBUG);
+//        PropertyConfigurator.configure("E:\\workspace\\mb-interview\\ssmDemo\\src\\main\\resources\\log4j.properties");
         System.out.println("测试数据 ---------->" + JSON.toJSONString("fcaawf"));
-        categoryService.addTwo();
+        logger.info("yhubu");
+//        categoryService.addTwo();
 
     }
 //     
