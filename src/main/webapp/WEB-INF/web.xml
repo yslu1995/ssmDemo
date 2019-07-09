@@ -3,7 +3,13 @@
          xmlns="http://java.sun.com/xml/ns/javaee" 
          xmlns:web="http://java.sun.com/xml/ns/javaee" 
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-	
+
+	<!--这里仅仅是允许访问jpg,如果你要显示png,gif那么需要额外进行配置-->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+
 	<!-- spring的配置文件  进行Spring相关初始化工作-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

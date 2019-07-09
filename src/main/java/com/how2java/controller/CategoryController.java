@@ -19,7 +19,7 @@ import java.util.List;
 
 // 告诉spring mvc这是一个控制器类
 @Controller
-@RequestMapping("")
+//@RequestMapping("")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
