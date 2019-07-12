@@ -71,17 +71,17 @@
 		<property name="dataSource" ref="dataSource"/>
 		<property name="mapperLocations" value="classpath:mapper/*.xml"/>
 		<!--分页插件，目前先注释，后面重构的时候才会使用-->
-		<property name="plugins">
+<!--		<property name="plugins">
 		    <array>
 		      <bean class="com.github.pagehelper.PageInterceptor">
 		        <property name="properties">
-		          <!--使用下面的方式配置参数，一行配置一个 -->
+		          &lt;!&ndash;使用下面的方式配置参数，一行配置一个 &ndash;&gt;
 		          <value>
 		          </value>
 		        </property>
 		      </bean>
 		    </array>
-		  </property>		
+		  </property>	-->
 	</bean>
 
 	<!--4. 扫描Mapper，并将其生命周期纳入Spring的管理   通过3和4的配置，可以把mapper.java和mapper.xml对应起来-->
@@ -89,13 +89,9 @@
 		<property name="basePackage" value="com.how2java.tmall.mapper"/>
 	</bean>
 
-	<!--修改applicationContext.xml，添加事务管理器和事务注解扫描器-->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.how2java.tmall.mapper"/>
-	</bean>
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+<!--	<tx:annotation-driven transaction-manager="transactionManager"/>-->
+<!--	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+<!--		<property name="dataSource" ref="dataSource" />-->
+<!--	</bean>-->
 
 </beans>
