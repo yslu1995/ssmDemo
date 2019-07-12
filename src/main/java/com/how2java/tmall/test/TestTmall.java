@@ -17,8 +17,8 @@ public class TestTmall {
         }
   
         try (
-                Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/tmall_ssm?useUnicode=true&characterEncoding=utf8",
-                        "root", "jhkj@520");
+                Connection c = DriverManager.getConnection("jdbc:mysql://114.55.210.33:3306/tmall_ssm?useUnicode=true&characterEncoding=utf8",
+                        "root", "admin");
                 Statement s = c.createStatement();
         )
         {
