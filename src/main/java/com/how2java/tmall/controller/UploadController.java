@@ -1,7 +1,7 @@
-package com.how2java.controller;
+package com.how2java.tmall.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.how2java.pojo.UploadedImageFile;
+import com.how2java.tmall.pojo.UploadedImageFile;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

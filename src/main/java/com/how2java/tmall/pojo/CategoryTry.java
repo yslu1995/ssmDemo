@@ -1,11 +1,11 @@
-package com.how2java.pojo;
+package com.how2java.tmall.pojo;
 
 import java.io.Serializable;
 
 /**
  * @author apple
  */
-public class Category implements Serializable {
+public class CategoryTry implements Serializable {
     private static final long serialVersionUID = 2987028313148342244L;
     private int id;
     private String name;

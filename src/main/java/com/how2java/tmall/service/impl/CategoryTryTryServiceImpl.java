@@ -1,25 +1,25 @@
-package com.how2java.service.impl;
+package com.how2java.tmall.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.how2java.mapper.CategoryMapper;
-import com.how2java.pojo.Category;
-import com.how2java.service.CategoryService;
+import com.how2java.tmall.mapper.CategoryTryMapper;
+import com.how2java.tmall.pojo.CategoryTry;
+import com.how2java.tmall.service.CategoryTryService;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class CategoryServiceImpl  implements CategoryService{
+public class CategoryTryTryServiceImpl implements CategoryTryService {
 	@Autowired
-	CategoryMapper categoryMapper;
+	CategoryTryMapper categoryTryMapper;
 	
 	
 	@Override
-	public List<Category> list(){
-		return categoryMapper.list();
+	public List<CategoryTry> list(){
+		return categoryTryMapper.list();
 	}
 
 	/**
@@ -30,13 +30,13 @@ public class CategoryServiceImpl  implements CategoryService{
 	@Override
 	@Transactional(propagation= Propagation.REQUIRED,rollbackForClassName="Exception")
 	public void addTwo() {
-		Category c1 = new Category();
+		CategoryTry c1 = new CategoryTry();
 		c1.setName("短的名字");
-		categoryMapper.add(c1);
+		categoryTryMapper.add(c1);
 
-		Category c2 = new Category();
+		CategoryTry c2 = new CategoryTry();
 		c2.setName("名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,");
-		categoryMapper.add(c2);
+		categoryTryMapper.add(c2);
 	}
 
 

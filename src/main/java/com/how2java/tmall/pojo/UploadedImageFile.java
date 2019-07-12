@@ -1,4 +1,4 @@
-package com.how2java.pojo;
+package com.how2java.tmall.pojo;
 
 import org.springframework.web.multipart.MultipartFile;
 

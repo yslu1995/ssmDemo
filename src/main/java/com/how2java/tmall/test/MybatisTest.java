@@ -1,9 +1,9 @@
-package com.how2java.test;
+package com.how2java.tmall.test;
 
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
-import com.how2java.mapper.CategoryMapper;
-import com.how2java.service.CategoryService;
+import com.how2java.tmall.mapper.CategoryTryMapper;
+import com.how2java.tmall.service.CategoryTryService;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,10 +18,10 @@ import java.util.Date;
 public class MybatisTest {
     static Logger logger = Logger.getLogger(MybatisTest.class);
     @Autowired
-    private CategoryMapper categoryMapper;
+    private CategoryTryMapper categoryTryMapper;
 
     @Autowired
-    private CategoryService categoryService;
+    private CategoryTryService categoryTryService;
 
     @Test
     public void testHutool(){

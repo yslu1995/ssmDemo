@@ -1,11 +1,11 @@
-package com.how2java.controller;
+package com.how2java.tmall.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.how2java.pojo.Category;
-import com.how2java.service.CategoryService;
+import com.how2java.tmall.pojo.CategoryTry;
+import com.how2java.tmall.service.CategoryTryService;
 import com.how2java.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,15 +20,16 @@ import java.util.List;
 // 告诉spring mvc这是一个控制器类
 @Controller
 //@RequestMapping("")
-public class CategoryController {
+public class CategoryTryController {
+
     @Autowired
-    CategoryService categoryService;
+    CategoryTryService categoryTryService;
 
     @RequestMapping("listCategory")
     public ModelAndView listCategory(Page page) {
         ModelAndView mav = new ModelAndView();
         PageHelper.offsetPage(page.getStart(), 5);
-        List<Category> cs = categoryService.list();
+        List<CategoryTry> cs = categoryTryService.list();
         int total = (int) new PageInfo<>(cs).getTotal();
 
         page.caculateLast(total);
@@ -43,15 +44,15 @@ public class CategoryController {
 
     @ResponseBody
     @RequestMapping("/submitCategory")
-    public String submitCategory(@RequestBody Category category) {
-        System.out.println("SSM接受到浏览器提交的json，并转换为Category对象:"+category);
+    public String submitCategory(@RequestBody CategoryTry categoryTry) {
+        System.out.println("SSM接受到浏览器提交的json，并转换为Category对象:"+ categoryTry);
         return "ok";
     }
 
     @ResponseBody
     @RequestMapping("/getOneCategory")
     public String getOneCategory() {
-        Category c = new Category();
+        CategoryTry c = new CategoryTry();
         c.setId(100);
         c.setName("第100个分类");
         JSONObject json= new JSONObject();
@@ -63,9 +64,9 @@ public class CategoryController {
     @ResponseBody
     @RequestMapping("/getManyCategory")
     public String getManyCategory() {
-        List<Category> cs = new ArrayList<>();
+        List<CategoryTry> cs = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            Category c = new Category();
+            CategoryTry c = new CategoryTry();
             c.setId(i);
             c.setName("分类名称:"+i);
             cs.add(c);
