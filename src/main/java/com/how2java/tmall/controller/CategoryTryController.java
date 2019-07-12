@@ -37,7 +37,7 @@ public class CategoryTryController {
         // 放入转发参数
         mav.addObject("cs", cs);
         // 放入jsp路径
-        mav.setViewName("listCategory");
+        mav.setViewName("listCategoryTry");
         return mav;
     }
 
@@ -45,7 +45,7 @@ public class CategoryTryController {
     @ResponseBody
     @RequestMapping("/submitCategory")
     public String submitCategory(@RequestBody CategoryTry categoryTry) {
-        System.out.println("SSM接受到浏览器提交的json，并转换为Category对象:"+ categoryTry);
+        System.out.println("SSM接受到浏览器提交的json，并转换为Category对象:" + categoryTry);
         return "ok";
     }
 
@@ -55,12 +55,13 @@ public class CategoryTryController {
         CategoryTry c = new CategoryTry();
         c.setId(100);
         c.setName("第100个分类");
-        JSONObject json= new JSONObject();
+        JSONObject json = new JSONObject();
         json.put("category", JSONObject.toJSON(c));
         System.out.println(JSONObject.toJSON(c));
         System.out.println(json.toJSONString());
         return json.toJSONString();
     }
+
     @ResponseBody
     @RequestMapping("/getManyCategory")
     public String getManyCategory() {
@@ -68,7 +69,7 @@ public class CategoryTryController {
         for (int i = 0; i < 10; i++) {
             CategoryTry c = new CategoryTry();
             c.setId(i);
-            c.setName("分类名称:"+i);
+            c.setName("分类名称:" + i);
             cs.add(c);
         }
 
