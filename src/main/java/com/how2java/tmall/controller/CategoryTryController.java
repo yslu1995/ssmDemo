@@ -6,7 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.how2java.tmall.pojo.CategoryTry;
 import com.how2java.tmall.service.CategoryTryService;
-import com.how2java.util.Page;
+import com.how2java.tmall.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,22 +24,22 @@ public class CategoryTryController {
 
     @Autowired
     CategoryTryService categoryTryService;
-
-    @RequestMapping("listCategory")
-    public ModelAndView listCategory(Page page) {
-        ModelAndView mav = new ModelAndView();
-        PageHelper.offsetPage(page.getStart(), 5);
-        List<CategoryTry> cs = categoryTryService.list();
-        int total = (int) new PageInfo<>(cs).getTotal();
-
-        page.caculateLast(total);
-
-        // 放入转发参数
-        mav.addObject("cs", cs);
-        // 放入jsp路径
-        mav.setViewName("listCategoryTry");
-        return mav;
-    }
+//
+//    @RequestMapping("listCategory")
+//    public ModelAndView listCategory(Page page) {
+//        ModelAndView mav = new ModelAndView();
+//        PageHelper.offsetPage(page.getStart(), 5);
+//        List<CategoryTry> cs = categoryTryService.list();
+//        int total = (int) new PageInfo<>(cs).getTotal();
+//
+//        page.caculateLast(total);
+//
+//        // 放入转发参数
+//        mav.addObject("cs", cs);
+//        // 放入jsp路径
+//        mav.setViewName("listCategoryTry");
+//        return mav;
+//    }
 
 
     @ResponseBody
