@@ -7,11 +7,17 @@ import java.util.List;
 
 public interface CategoryMapper {
 
-    List<Category> list(Page page);
+    //List<Category> list(Page page);
 
-    int total();
+    //int total();
+
+    List<Category> list();
 
     void add(Category category);
 
     void delete(int id);
+
+    Category get(int id);
+
+    void update(Category category);
 }

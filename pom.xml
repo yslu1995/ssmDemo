@@ -50,6 +50,8 @@
 <!--            <scope>provided</scope>-->
 <!--        </dependency>-->
 
+
+
         <!--处理二维码图片-->
         <dependency>
             <groupId>com.google.zxing</groupId>
