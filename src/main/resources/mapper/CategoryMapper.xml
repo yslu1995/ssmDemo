@@ -19,5 +19,10 @@
         select count(*) from category
     </select>
 
+    <!--数据库id自增字段-->
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="Category">
+        insert into category ( name ) values (#{name})
+    </insert>
+
 
 </mapper>

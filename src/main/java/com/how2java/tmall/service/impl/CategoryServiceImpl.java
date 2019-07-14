@@ -20,6 +20,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public void add(Category category) {
+        categoryMapper.add(category);
+    }
+
+    @Override
     public List<Category> list() {
         return null;
     }
