@@ -69,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
         return result;
     }
 
-    @Override
+
     public void setFirstProductImage(Product p) {
         List<ProductImage> pis = productImageService.list(p.getId(), ProductImageService.type_single);
         if (!pis.isEmpty()) {
@@ -78,6 +78,7 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
     public void setFirstProductImage(List<Product> ps) {
         for (Product p : ps) {
             setFirstProductImage(p);

@@ -4,7 +4,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.how2java.tmall.pojo.Category;
 import com.how2java.tmall.pojo.Product;
+import com.how2java.tmall.pojo.ProductImage;
 import com.how2java.tmall.service.CategoryService;
+import com.how2java.tmall.service.ProductImageService;
 import com.how2java.tmall.service.ProductService;
 import com.how2java.tmall.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +59,7 @@ public class ProductController {
 
         PageHelper.offsetPage(page.getStart(),page.getCount());
         List<Product> ps = productService.list(cid);
-
+        productService.setFirstProductImage(ps);
         int total = (int) new PageInfo<>(ps).getTotal();
         page.setTotal(total);
         page.setParam("&cid="+c.getId());
@@ -65,7 +67,7 @@ public class ProductController {
         model.addAttribute("ps", ps);
         model.addAttribute("c", c);
         model.addAttribute("page", page);
-
+//        List<ProductImage> pisSingle = productImageService.list(pid, ProductImageService.type_single);
         return "admin/listProduct";
     }
 }
