@@ -53,6 +53,7 @@ public class PropertyController {
 
     @RequestMapping("admin_property_list")
     public String list(int cid, Model model,  Page page) {
+        //种类介绍详情
         Category c = categoryService.get(cid);
 
         PageHelper.offsetPage(page.getStart(),page.getCount());
