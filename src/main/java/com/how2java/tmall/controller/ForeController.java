@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.HtmlUtils;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -47,6 +49,7 @@ public class ForeController {
     /**
      * 注册页面填完数据提交action
      * 重复密码，是否为空等等已校验
+     *
      * @param model
      * @param user
      * @return
@@ -73,6 +76,42 @@ public class ForeController {
         userService.add(user);
         //跳转注册成功页面，重定向，客户端重新发起请求
         return "redirect:registerSuccessPage";
+    }
+
+    /**
+     * 接收用户账号密码 登录
+     * @param name
+     * @param password
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping("forelogin")
+    public String login(@RequestParam("name") String name, @RequestParam("password") String password, Model model, HttpSession session) {
+        //因为注册的时候，ForeController.register()，就进行了转义，所以这里也需要转义。有些同学在恶意注册的时候，会使用诸如 <script>alert('papapa')</script> 这样的名称，会导致网页打开就弹出一个对话框。
+        name = HtmlUtils.htmlEscape(name);
+        User user = userService.get(name, password);
+
+        if (null == user) {
+            model.addAttribute("msg", "账号密码错误");
+            //密码错误返回用户登陆页面，服务器内部跳转
+            return "fore/login";
+        }
+        //将user信息存入session
+        session.setAttribute("user", user);
+        return "redirect:forehome";
+    }
+
+    /**
+     * 用户退出
+     * @param session
+     * @return
+     */
+    @RequestMapping("forelogout")
+    public String logout(HttpSession session) {
+        //将user信息移出session
+        session.removeAttribute("user");
+        return "redirect:forehome";
     }
 
 }

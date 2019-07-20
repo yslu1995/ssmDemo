@@ -8,7 +8,10 @@
 
 <%--启动重定向--%>
 <%
-  response.sendRedirect("forehome");
+  /*首页*/
+//  response.sendRedirect("forehome");
+  //登陆页面
+  response.sendRedirect("loginPage");
 %>
 <%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%--<html>--%>
