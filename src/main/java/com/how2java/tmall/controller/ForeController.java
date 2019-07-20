@@ -44,6 +44,13 @@ public class ForeController {
         return "fore/home";
     }
 
+    /**
+     * 注册页面填完数据提交action
+     * 重复密码，是否为空等等已校验
+     * @param model
+     * @param user
+     * @return
+     */
     @RequestMapping("foreregister")
     public String register(Model model, User user) {
         //1. 通过参数User获取浏览器提交的账号密码
@@ -60,9 +67,11 @@ public class ForeController {
             model.addAttribute("msg", m);
             //注 model.addAttribute("user", null); 这句话的用处是当用户存在，服务端跳转到register.jsp的时候不带上参数user, 否则当注册失败的时候，会在原本是“请登录”的超链位置显示刚才注册的名称。 可以试试把这一条语句注释掉观察这个现象
             model.addAttribute("user", null);
+            //调回原来的注册页面
             return "fore/register";
         }
         userService.add(user);
+        //跳转注册成功页面，重定向，客户端重新发起请求
         return "redirect:registerSuccessPage";
     }
 
