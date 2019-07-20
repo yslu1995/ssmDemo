@@ -42,4 +42,21 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByExample(example);
     }
 
+    /**
+     * 判断某个名称是否已经被使用过了
+     * @param name
+     * @return
+     */
+    @Override
+    public boolean isExist(String name) {
+        UserExample example =new UserExample();
+        example.createCriteria().andNameEqualTo(name);
+        List<User> result= userMapper.selectByExample(example);
+        if(!result.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+
 }

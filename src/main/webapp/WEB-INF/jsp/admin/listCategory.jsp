@@ -2,12 +2,12 @@
          pageEncoding="UTF-8" import="java.util.*"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="../include/admin/adminNavigator.jsp"%>
 <%@include file="../include/admin/adminHeader.jsp"%>
+<%@include file="../include/admin/adminNavigator.jsp"%>
 
 <script>
     $(function(){
-        /*为空校验*/
+
         $("#addForm").submit(function(){
             if(!checkEmpty("name","分类名称"))
                 return false;
@@ -40,8 +40,8 @@
             </tr>
             </thead>
             <tbody>
-            <%--从modelandview中获取cs对象，遍历这个List对象，每个object的对象命名为c--%>
             <c:forEach items="${cs}" var="c">
+
                 <tr>
                     <td>${c.id}</td>
                     <td><img height="40px" src="img/category/${c.id}.jpg"></td>
@@ -65,7 +65,6 @@
     <div class="panel panel-warning addDiv">
         <div class="panel-heading">新增分类</div>
         <div class="panel-body">
-            <%--method="post" 用于保证中文的正确提交,action调用陪你过控制层的请求 必须有enctype="multipart/form-data"，这样才能上传文件--%>
             <form method="post" id="addForm" action="admin_category_add" enctype="multipart/form-data">
                 <table class="addTable">
                     <tr>
@@ -75,7 +74,6 @@
                     <tr>
                         <td>分类圖片</td>
                         <td>
-                            <%--accept="image/*" 这样把上传的文件类型限制在了图片--%>
                             <input id="categoryPic" accept="image/*" type="file" name="image" />
                         </td>
                     </tr>

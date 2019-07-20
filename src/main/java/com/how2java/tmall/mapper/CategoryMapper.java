@@ -1,6 +1,7 @@
 package com.how2java.tmall.mapper;
 
 import com.how2java.tmall.pojo.Category;
+import com.how2java.tmall.pojo.CategoryExample;
 import com.how2java.tmall.util.Page;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface CategoryMapper {
     Category get(int id);
 
     void update(Category category);
+
+    List<Category> selectByExample(CategoryExample example);
 }

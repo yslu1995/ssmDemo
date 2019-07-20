@@ -2,6 +2,7 @@ package com.how2java.tmall.service.impl;
 
 import com.how2java.tmall.mapper.CategoryMapper;
 import com.how2java.tmall.pojo.Category;
+import com.how2java.tmall.pojo.CategoryExample;
 import com.how2java.tmall.service.CategoryService;
 import com.how2java.tmall.util.Page;
 import org.apache.log4j.Logger;
@@ -45,7 +46,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> list() {
-        return categoryMapper.list();
+//        return categoryMapper.list();
+        CategoryExample example = new CategoryExample();
+        example.setOrderByClause("id desc");
+        return categoryMapper.selectByExample(example);
     }
 
 
