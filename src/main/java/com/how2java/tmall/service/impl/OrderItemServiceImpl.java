@@ -106,6 +106,18 @@ public class OrderItemServiceImpl implements OrderItemService {
         oi.setProduct(p);
     }
 
-    ;
+    /**
+     * 查询用户的购物车选项
+     * @param uid
+     * @return
+     */
+    @Override
+    public List<OrderItem> listByUser(int uid) {
+        OrderItemExample example =new OrderItemExample();
+        example.createCriteria().andUidEqualTo(uid).andOidIsNull();
+        List<OrderItem> result =orderItemMapper.selectByExample(example);
+        setProduct(result);
+        return result;
+    }
 
 }

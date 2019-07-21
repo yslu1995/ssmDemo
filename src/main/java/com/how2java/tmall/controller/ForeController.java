@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -203,19 +204,82 @@ public class ForeController {
 
     /**
      * 搜索
+     *
      * @param keyword
      * @param model
      * @return
      */
     @RequestMapping("foresearch")
-    public String search( String keyword,Model model){
+    public String search(String keyword, Model model) {
 
-        PageHelper.offsetPage(0,20);
-        List<Product> ps= productService.search(keyword);
+        PageHelper.offsetPage(0, 20);
+        List<Product> ps = productService.search(keyword);
         productService.setSaleAndReviewNumber(ps);
-        model.addAttribute("ps",ps);
+        model.addAttribute("ps", ps);
         return "fore/searchResult";
     }
 
+    /**
+     * 商品页面直接点击购买选项
+     *
+     * @param pid
+     * @param num
+     * @param session
+     * @return
+     */
+    @RequestMapping("forebuyone")
+    public String buyone(int pid, int num, HttpSession session) {
+        Product p = productService.get(pid);
+        int oiid = 0;
 
+        User user = (User) session.getAttribute("user");
+        boolean found = false;
+        //1 基于用户对象user，查询没有生成订单的订单项集合（还在购物车中）
+        List<OrderItem> ois = orderItemService.listByUser(user.getId());
+        for (OrderItem oi : ois) {
+            if (oi.getProduct().getId().intValue() == p.getId().intValue()) {
+                //如果产品是一样的话，就进行数量追加
+                oi.setNumber(oi.getNumber() + num);
+                orderItemService.update(oi);
+                found = true;
+                oiid = oi.getId();
+                break;
+            }
+        }
+
+        //如果不存在对应的OrderItem,那么就新增一个订单项OrderItem（查看商品直接购买的情况，购物车没有记录）
+        if (!found) {
+            OrderItem oi = new OrderItem();
+            oi.setUid(user.getId());
+            oi.setNumber(num);
+            oi.setPid(pid);
+            orderItemService.add(oi);
+            oiid = oi.getId();
+        }
+        return "redirect:forebuy?oiid=" + oiid;
+    }
+
+    /**
+     * 结算页面
+     * @param model
+     * @param oiid
+     * @param session
+     * @return
+     */
+    @RequestMapping("forebuy")
+    public String buy( Model model,String[] oiid,HttpSession session){
+        List<OrderItem> ois = new ArrayList<>();
+        float total = 0;
+
+        for (String strid : oiid) {
+            int id = Integer.parseInt(strid);
+            OrderItem oi= orderItemService.get(id);
+            total +=oi.getProduct().getPromotePrice()*oi.getNumber();
+            ois.add(oi);
+        }
+
+        session.setAttribute("ois", ois);
+        model.addAttribute("total", total);
+        return "fore/buy";
+    }
 }

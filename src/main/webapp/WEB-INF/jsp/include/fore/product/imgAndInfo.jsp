@@ -1,81 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" isELIgnored="false"%>
+         pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script>
 
-    $(function(){
+    $(function () {
         var stock = ${p.stock};
-        $(".productNumberSetting").keyup(function(){
-            var num= $(".productNumberSetting").val();
+        $(".productNumberSetting").keyup(function () {
+            var num = $(".productNumberSetting").val();
             num = parseInt(num);
-            if(isNaN(num))
-                num= 1;
-            if(num<=0)
+            if (isNaN(num))
                 num = 1;
-            if(num>stock)
+            if (num <= 0)
+                num = 1;
+            if (num > stock)
                 num = stock;
             $(".productNumberSetting").val(num);
         });
 
-        $(".increaseNumber").click(function(){
-            var num= $(".productNumberSetting").val();
+        $(".increaseNumber").click(function () {
+            var num = $(".productNumberSetting").val();
             num++;
-            if(num>stock)
+            if (num > stock)
                 num = stock;
             $(".productNumberSetting").val(num);
         });
-        $(".decreaseNumber").click(function(){
-            var num= $(".productNumberSetting").val();
+        $(".decreaseNumber").click(function () {
+            var num = $(".productNumberSetting").val();
             --num;
-            if(num<=0)
-                num=1;
+            if (num <= 0)
+                num = 1;
             $(".productNumberSetting").val(num);
         });
 
-        $(".addCartLink").click(function(){
+        $(".addCartButton").removeAttr("disabled");
+        $(".addCartLink").click(function () {
             var page = "forecheckLogin";
             $.get(
                 page,
-                function(result){
-                    if("success"==result){
+                function (result) {
+                    if ("success" == result) {
                         var pid = ${p.id};
-                        var num= $(".productNumberSetting").val();
+                        var num = $(".productNumberSetting").val();
                         var addCartpage = "foreaddCart";
                         $.get(
                             addCartpage,
-                            {"pid":pid,"num":num},
-                            function(result){
-                                if("success"==result){
+                            {"pid": pid, "num": num},
+                            function (result) {
+                                if ("success" == result) {
                                     $(".addCartButton").html("已加入购物车");
-                                    $(".addCartButton").attr("disabled","disabled");
-                                    $(".addCartButton").css("background-color","lightgray")
-                                    $(".addCartButton").css("border-color","lightgray")
-                                    $(".addCartButton").css("color","black")
+                                    $(".addCartButton").attr("disabled", "disabled");
+                                    $(".addCartButton").css("background-color", "lightgray")
+                                    $(".addCartButton").css("border-color", "lightgray")
+                                    $(".addCartButton").css("color", "black")
 
-                                }
-                                else{
+                                } else {
 
                                 }
                             }
                         );
-                    }
-                    else{
+                    } else {
                         $("#loginModal").modal('show');
                     }
                 }
             );
             return false;
         });
-        $(".buyLink").click(function(){
+        $(".buyLink").click(function () {
             var page = "forecheckLogin";
             $.get(
                 page,
-                function(result){
-                    if("success"==result){
+                function (result) {
+                    if ("success" == result) {
                         var num = $(".productNumberSetting").val();
-                        location.href= $(".buyLink").attr("href")+"&num="+num;
-                    }
-                    else{
+                        location.href = $(".buyLink").attr("href") + "&num=" + num;
+                    } else {
                         $("#loginModal").modal('show');
                     }
                 }
@@ -83,11 +82,11 @@
             return false;
         });
 
-        $("button.loginSubmitButton").click(function(){
+        $("button.loginSubmitButton").click(function () {
             var name = $("#name").val();
             var password = $("#password").val();
 
-            if(0==name.length||0==password.length){
+            if (0 == name.length || 0 == password.length) {
                 $("span.errorMessage").html("请输入账号密码");
                 $("div.loginErrorMessageDiv").show();
                 return false;
@@ -96,12 +95,11 @@
             var page = "foreloginAjax";
             $.get(
                 page,
-                {"name":name,"password":password},
-                function(result){
-                    if("success"==result){
+                {"name": name, "password": password},
+                function (result) {
+                    if ("success" == result) {
                         location.reload();
-                    }
-                    else{
+                    } else {
                         $("span.errorMessage").html("账号密码错误");
                         $("div.loginErrorMessageDiv").show();
                     }
@@ -111,20 +109,19 @@
             return true;
         });
 
-        $("img.smallImage").mouseenter(function(){
+        $("img.smallImage").mouseenter(function () {
             var bigImageURL = $(this).attr("bigImageURL");
-            $("img.bigImg").attr("src",bigImageURL);
+            $("img.bigImg").attr("src", bigImageURL);
         });
 
         $("img.bigImg").load(
-            function(){
-                $("img.smallImage").each(function(){
+            function () {
+                $("img.smallImage").each(function () {
                     var bigImageURL = $(this).attr("bigImageURL");
                     img = new Image();
                     img.src = bigImageURL;
 
-                    img.onload = function(){
-                        console.log(bigImageURL);
+                    img.onload = function () {
                         $("div.img4load").append($(img));
                     };
                 });
@@ -140,11 +137,13 @@
         <img src="img/productSingle/${p.firstProductImage.id}.jpg" class="bigImg">
         <div class="smallImageDiv">
             <c:forEach items="${p.productSingleImages}" var="pi">
-                <img src="img/productSingle_small/${pi.id}.jpg" bigImageURL="img/productSingle/${pi.id}.jpg" class="smallImage">
+                <img src="img/productSingle_small/${pi.id}.jpg" bigImageURL="img/productSingle/${pi.id}.jpg"
+                     class="smallImage">
             </c:forEach>
         </div>
-        <div class="img4load hidden" ></div>
+        <div class="img4load hidden"></div>
     </div>
+
 
     <div class="infoInimgAndInfo">
 
@@ -155,11 +154,14 @@
             ${p.subTitle}
         </div>
 
+
         <div class="productPrice">
             <div class="juhuasuan">
-                <span class="juhuasuanBig" >聚划算</span>
+                <span class="juhuasuanBig">聚划算</span>
                 <span>此商品即将参加聚划算，<span class="juhuasuanTime">1天19小时</span>后开始，</span>
             </div>
+
+
             <div class="productPriceDiv">
                 <div class="gouwujuanDiv"><img height="16px" src="img/site/gouwujuan.png">
                     <span> 全天猫实物商品通用</span>
@@ -169,10 +171,10 @@
                     <span class="originalPriceDesc">价格</span>
                     <span class="originalPriceYuan">¥</span>
                     <span class="originalPrice">
-
                         <fmt:formatNumber type="number" value="${p.originalPrice}" minFractionDigits="2"/>
                     </span>
                 </div>
+
                 <div class="promotionDiv">
                     <span class="promotionPriceDesc">促销价 </span>
                     <span class="promotionPriceYuan">¥</span>
@@ -182,6 +184,7 @@
                 </div>
             </div>
         </div>
+
         <div class="productSaleAndReviewNumber">
             <div>销量 <span class="redColor boldWord"> ${p.saleCount }</span></div>
             <div>累计评价 <span class="redColor boldWord"> ${p.reviewCount}</span></div>
@@ -200,7 +203,7 @@
                     </a>
 
                     <span class="updownMiddle"> </span>
-                    <a href="#nowhere"  class="decreaseNumber">
+                    <a href="#nowhere" class="decreaseNumber">
                     <span class="updown">
                             <img src="img/site/decrease.png">
                     </span>
@@ -222,8 +225,12 @@
         </div>
 
         <div class="buyDiv">
-            <a class="buyLink" href="forebuyone?pid=${p.id}"><button class="buyButton">立即购买</button></a>
-            <a href="#nowhere" class="addCartLink"><button class="addCartButton"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button></a>
+            <a class="buyLink" href="forebuyone?pid=${p.id}">
+                <button class="buyButton">立即购买</button>
+            </a>
+            <a href="#nowhere" class="addCartLink">
+                <button class="addCartButton"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button>
+            </a>
         </div>
     </div>
 
