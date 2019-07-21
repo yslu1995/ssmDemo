@@ -17,5 +17,12 @@ public interface OrderItemService {
     void fill(List<Order> os);
  
     void fill(Order o);
+
+    /**
+     * 增加根据产品获取销售量的方法：
+     * @param pid
+     * @return
+     */
+    int getSaleCount(int  pid);
  
 }

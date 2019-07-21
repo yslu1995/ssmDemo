@@ -1,14 +1,12 @@
 package com.how2java.tmall.service.impl;
  
 import java.util.List;
- 
+
+import com.how2java.tmall.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
  
 import com.how2java.tmall.mapper.OrderMapper;
-import com.how2java.tmall.pojo.Order;
-import com.how2java.tmall.pojo.OrderExample;
-import com.how2java.tmall.pojo.User;
 import com.how2java.tmall.service.OrderService;
 import com.how2java.tmall.service.UserService;
  
@@ -40,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.selectByPrimaryKey(id);
     }
  
+    @Override
     public List<Order> list(){
         OrderExample example =new OrderExample();
         example.setOrderByClause("id desc");
@@ -48,8 +47,9 @@ public class OrderServiceImpl implements OrderService {
         return result;
     }
     public void setUser(List<Order> os){
-        for (Order o : os)
+        for (Order o : os) {
             setUser(o);
+        }
     }
     public void setUser(Order o){
         int uid = o.getUid();

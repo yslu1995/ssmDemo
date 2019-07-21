@@ -1025,7 +1025,7 @@ span.productReviewTopReviewLinkNumber {
 }
 
 div.productDetailImagesPart img {
-	display: block; margin 20px 0px;
+	display: block; margin:20px 0px;
 	width: 790px;
 }
 
@@ -1610,7 +1610,7 @@ div.cartFoot button {
 	background-color: #AAAAAA;
 	border: 0px solid #AAAAAA;
 	color: white;
-	height: height%;
+	/*height: height%;*/
 	width: 120px;
 	height: 50px;
 	font-size: 20px;
