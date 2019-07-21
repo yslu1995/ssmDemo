@@ -25,6 +25,9 @@ public class CategoryTryTryServiceImpl implements CategoryTryService {
 	/**
 	 * 事务测试
 	 * 为数据库操作制定事务性！
+	 * 该方法通过注解进行事务管理
+	 *  if(false)
+	 *             throw new RuntimeException();  手动中断事务  数据库类型必须是InnoDB
 	 * @param
 	 */
 	@Override
@@ -33,7 +36,8 @@ public class CategoryTryTryServiceImpl implements CategoryTryService {
 		CategoryTry c1 = new CategoryTry();
 		c1.setName("短的名字");
 		categoryTryMapper.add(c1);
-
+//		if(false)
+//        throw new RuntimeException();
 		CategoryTry c2 = new CategoryTry();
 		c2.setName("名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,名字长对应字段放不下,");
 		categoryTryMapper.add(c2);
